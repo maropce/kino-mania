@@ -1,0 +1,70 @@
+﻿@using System.Security.Claims
+@model KinoMania2.Models.Reservation
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Utwórz</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" name="userId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
+            <label for="filmDropdown">Film</label>
+            <select id="filmDropdown" name="FilmId" class="form-control">
+                <option value="">-- Wybierz Film --</option>
+                @foreach (var film in (SelectList)ViewData["Film"])
+                {
+                    <option value="@film.Value">@film.Text</option>
+                }
+            </select>
+            <div class="form-group">
+                <label for="dateDropdown">Date</label>
+                <select id="dateDropdown" name="Date" class="form-control">
+                    <option value="">-- Wybierz Datę --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Utwórz" class="btn btn-primary" />
+            </div>
+        </form>
+      
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Powrót</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        document.getElementById("filmDropdown").addEventListener("change", function () {
+            const filmId = this.value;
+            const dateDropdown = document.getElementById("dateDropdown");
+
+            dateDropdown.innerHTML = '<option value="">-- Wybierz Datę --</option>';
+
+            if (filmId) {
+                fetch(`/Reservations/GetDatesByFilmId?filmId=${filmId}`)
+                    .then(response => response.json())
+                    .then(dates => {
+                        dates.forEach(date => {
+                            //console.log(date);
+                            const option = document.createElement("option");
+                            option.value = date;
+                            option.textContent = new Date(date).toLocaleDateString();
+                            dateDropdown.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error("Error loading dates:", error));
+            }
+        });
+    </script>
+}

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<KinoMania2.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Moje Rezerwacje</h1>
+
+<p>
+    <a asp-action="Create">Dodaj rezerwację</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seans.Film.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seans.Film.time)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Seans.Film.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Seans.Film.time)
+                </td>
+                <td>          
+                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

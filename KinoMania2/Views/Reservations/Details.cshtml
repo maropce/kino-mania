@@ -1,0 +1,35 @@
+﻿@model KinoMania2.Models.Reservation
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Szczegóły</h1>
+
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Seans.Film.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Seans.Film.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Seans.Film.time)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Seans.Film.time)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Powrót</a>
+</div>

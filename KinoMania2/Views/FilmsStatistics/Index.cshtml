@@ -1,0 +1,24 @@
+﻿@model FilmStatisticsViewModel
+
+<h1>Statystyki oglądania</h1>
+
+<p><strong>Łączna ilość obejrzanych minut:</strong> @Model.TotalMinutesWatched</p>
+
+<h2>Obejrzane filmy według gatunku:</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Gatunek</th>
+            <th>Liczba filmów</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var genre in Model.FilmsWatchedByGenre)
+        {
+            <tr>
+                <td>@genre.Key</td>
+                <td>@genre.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>

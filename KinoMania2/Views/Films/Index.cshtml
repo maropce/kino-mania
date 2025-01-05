@@ -1,0 +1,55 @@
+﻿@model IEnumerable<KinoMania2.Models.Film>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista filmów</h1>
+
+<form method="get">
+    <div class="mb-3">
+        <select name="filmTypeId" class="form-control">
+            <option value="">Wybierz gatunek</option>
+            @foreach (var item in ViewData["FilmTypes"] as SelectList)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Filtruj</button>
+</form>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-success mt-3">Dodaj</a>
+    </p>
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Autor: @item.Author</h6>
+                    <p class="card-text">
+                        <strong>Czas trwania:</strong> @item.time min<br />
+                        <strong>Gatunek:</strong> @item.FilmType.Type<br />
+                        <strong>Opis:</strong> @item.description
+                    </p>
+                </div>
+                <div class="card-footer">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm me-2">Edytuj</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm me-2">Usuń</a>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Szczegóły</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

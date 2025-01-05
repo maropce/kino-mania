@@ -1,0 +1,59 @@
+﻿@model IEnumerable<KinoMania2.Models.Seans>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Seanse</h1>
+<form method="get">
+    <div class="form-group">
+        <label for="filterDate">Filtruj po dacie:</label>
+        <input type="date" id="filterDate" name="filterDate" class="form-control" />
+        <button type="submit" class="btn btn-primary mt-2">Filtruj</button>
+    </div>
+</form>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Dodaj nowy</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Film)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Film.Title)
+            </td>
+            <td>
+               
+                    @if (User.IsInRole("Admin"))
+                    {
+
+
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> <label> | </label>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a> <label> | </label>
+
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
