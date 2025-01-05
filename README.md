@@ -2,6 +2,8 @@
 
 Aplikacja **Kino Mania** umożliwia zarządzanie rezerwacjami biletów na seanse filmowe. Poniżej znajduje się instrukcja pierwszego uruchomienia projektu.
 
+# Przed uruchomiem zapoznaj się z dokumentacją dołączoną do projektu.
+
 ## Instrukcja pierwszego uruchomienia
 
 1. **Pobierz repozytorium**
@@ -26,13 +28,3 @@ Aplikacja **Kino Mania** umożliwia zarządzanie rezerwacjami biletów na seanse
    - Aby zalogować się na konto Administratora, użyj poniższych danych logowania:
      - **Login**: `admin@gmail.com`
      - **Hasło**: `!Admin123`
-
-## Technologie
-
-- ASP.NET Core
-- Entity Framework Core
-- SQL Server
-
-## Licencja
-
-Projekt jest dostępny na licencji MIT.
